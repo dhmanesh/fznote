@@ -1,0 +1,60 @@
+```
+
+function ulc () {
+    # Set default paths and variables
+    local UT_PATH=~/learn/linux/utags
+    local FILENAME="${1:-}"  # First argument is the input file, default to empty
+    
+    # Help function
+    show_help() {
+        cat << EOF
+Usage: ulc [OPTIONS] [FILENAME]
+ulc                             Uses default file at ~/learn/linux/utags
+ulc /path/to/your/tags.txt      Uses argument as input file
+ulc -h or ulc --help            Shows help information
+
+Description:
+    Interactive review of personal tagged knowledge book
+
+Options:
+    -h, --help    Show this help message
+    FILENAME      Path to the input file (optional, defaults to ~/learn/linux/utags)
+
+Key Bindings:
+    ENTER         Launch knowledge book in less - scrolled to show the selected tag
+    ESC           Exit the fzf interface
+    q (in less)   Return from less view
+    v (in less)   launch in editor
+Example:
+    ulc                           # Uses default UTAGS file
+    ulc /path/to/my/tags.txt      # Uses specified file
+    ulc -h                        # Shows this help
+EOF
+    }
+    
+    # Check for help flag
+    if [[ "${1}" == "-h" ]] || [[ "${1}" == "--help" ]]; then
+        show_help
+        return 0
+    fi
+    
+    # If no filename provided, use default
+    if [[ -z "${FILENAME}" ]]; then
+        FILENAME="${UT_PATH}"
+    fi
+    
+    # Check if file exists
+    if [[ ! -f "${FILENAME}" ]]; then
+        echo "Error: File '${FILENAME}' not found"
+        return 1
+    fi
+    
+    # Main fzf command with preview and execute
+    sed -n '/^_/p' "${FILENAME}" | \
+        fzf \
+            --preview-window='up:wrap' \
+            --preview "sed -n '/^{}/,/^_/p' '${FILENAME}' | head -n -1" \
+            --bind="enter:execute(less -p '^{}' '${FILENAME}')" \
+            --header=$'Press: ENTER to view in less; ESC to exit \nq (while viewing) to return'
+}
+```
