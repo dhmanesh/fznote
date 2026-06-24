@@ -1,0 +1,10 @@
+  ```
+  # Replace entire command line with xclip contents                                                                                                
+  paste_xclip() {                                                                 
+      READLINE_LINE="$(xclip -o)"                                                 
+      READLINE_POINT=${#READLINE_LINE}                                            
+  }                                                                               
+  #use ATL+q to inject xclip contents to command line: 
+a bind -x '"\eq": "paste_xclip"'
+   
+  ```
