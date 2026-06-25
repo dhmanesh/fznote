@@ -1,0 +1,43 @@
+_vim-LineNavigation
+  12G     Move cursor to line 12
+  32j     Go 32 lines down
+  21k     Go 21 lines up
+  H       Move cursor to line at the top of the window
+  M       Move cursor to the line at the middle of the window
+  L       Move cursor to the line at the bottom of the window
+   
+  paragraph: Blocks of consecutive non-empty lines.
+  :h paragraph to learn more
+  }       Move cursor to next paragraph
+  {       Move cursor to previous paragraph
+
+_tar-compression-examples
+  tar -cvf archive.tar /path/to/directory      Create uncompressed tar
+  tar -xvf archive.tar                         Extract tar archive
+  tar -czvf archive.tar.gz /path/to/dir        Create gzip compressed tar
+  tar -xzvf archive.tar.gz                     Extract gzip compressed tar
+
+_iptables-block-ip-address
+  iptables -A INPUT -s 1.2.3.4 -j DROP         Block a specific IP address
+  iptables -D INPUT -s 1.2.3.4 -j DROP         Unblock a specific IP address
+
+_lessMarkAndCopy 
+## Copy operations in 'less'
+  This engine uses xclip as the preferred clipbaord.
+  the process of copying lines of text in 'less' is fast and simple. Here is a brief description of the basi
+  cs.
+  Suppose you want to copy a block of lines to xclip. Scroll until the bottom line of the block is the last 
+  visible line. Press M (capital!) and choose a marker, e.g. the letter a. Now scroll again until the top li
+  ne of your intended block is the first visible line on the screen. Now press | and you will be asked for y
+  our marker. Press a and you will see ! Now  type xclip and press ENETR and you are done. Those line are no
+  w in xclip. You can check that from terminal by running xclip -o.
+   
+  This is just one way of copying lines in 'less'. There are a shortcut when you want just one line copied. 
+  No need for a marker in this case. Scroll and bring that line to the top of the visible screen and then:
+  press |
+  Ignore the request for marker and press ENETR 
+  ! appears. Now type:
+  head -1 | xclip (press ENTER) # and you are done 
+   
+  head -2 | xclip would have copied two line from the top and so on.
+   
