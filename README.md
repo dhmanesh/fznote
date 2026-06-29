@@ -3,7 +3,7 @@ Plain-Text Knowledge Base Engine
 markdown
 # Plain-Text Knowledge Base Engine
 
-A high-velocity, zero-dependency knowledge retrieval and note-editing engine
+A fast, zero-dependency knowledge retrieval and note-editing engine
 built purely on standard UNIX primitives (`fzf` and `less`). 
 
 ## The Philosophy
